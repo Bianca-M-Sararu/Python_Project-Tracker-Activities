@@ -1,0 +1,50 @@
+{% if request.user.is_authenticated %}
+{% load static %}
+    <style>
+    /* Existing styles ... */
+
+     .logout-button {
+        /* Styles for the Logout button */
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #aa3682;
+        color: #d2eef1;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        margin-left: 10px;
+      }
+
+        .logout-button:hover {
+        background-color: #002c79;
+     }
+
+    /* Other styles ... */
+    </style>
+
+
+{% if request.user.is_authenticated %}
+<div style="background-color: #fffcff; padding: 10px;">
+
+    <a href="/">
+        <img src="https://www.freepnglogos.com/uploads/sport-png/sport-sports-png-transparent-images-30.png" height="100" width="200">
+    </a>
+    
+    
+
+    <form method="GET" action="{% url 'Home' %}" style="margin-top: 10px;">
+        <input type="text" name="q" placeholder="Search Activity..." style="padding: 8px;">
+    </form>
+
+    <div style="margin-top: 20px;">
+        <p style="margin: 0; font-weight: bold;"> Welcome, {{ request.user }}</p>
+    </div>
+    <div style="margin-top: 20px;">
+        <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+    </div>
+
+    <hr style="margin-top: 20px;">
+</div>
+{% endif %}
+
+{% endif %}
