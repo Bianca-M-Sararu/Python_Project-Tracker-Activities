@@ -1,0 +1,55 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+    body {
+        background-color: #f4f4f4;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .activity-details {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        color: #40989c;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        color: #c7d9ec;
+        margin-bottom: 5px;
+    }
+
+    .activity-details div {
+        margin-top: 15px;
+    }
+</style>
+
+<div class="activity-details">
+    <h1>{{activitati.name}}</h1>
+
+    <p>{{activitati.description}}</p>
+
+    <div>
+        <h3>Rating Intensity: {{ activitati.rating_intensity }}</h3>
+        <p>Date and Time: {{ activitati.date_time_done }}</p>
+        <h3>Total Duration: {{ activitati.duration_in_seconds }} seconds</h3>
+
+        <!-- You can add additional details here -->
+    </div>
+</div>
+
+{% endblock %}

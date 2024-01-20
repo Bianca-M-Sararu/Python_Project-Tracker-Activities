@@ -1,0 +1,60 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+    body {
+        background-color: #f4f4f4;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    }
+
+    form {
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    p {
+        font-size: 18px;
+        color: #095163;
+        margin-bottom: 20px;
+    }
+
+    a {
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: #c2e9ef;
+        color: #737abc;
+        text-decoration: none;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    input[type="submit"] {
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: #a934b4;
+        color: #fff;
+        text-decoration: none;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #cb1cd1;
+    }
+</style>
+
+<form method="POST" action="">
+    {% csrf_token %}
+    <p>Are you sure you want to delete "{{obj}}"?</p>
+    <a href="{{request.META.HTTP_REFERER}}" class="go-back-button">Go Back</a>
+    <input type="submit" value="Confirm" class="confirm-button"/>
+</form>
+
+{% endblock content %}

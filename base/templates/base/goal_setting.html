@@ -1,0 +1,119 @@
+<!-- goal_setting.html -->
+{% extends 'main.html' %}
+
+{% block content %}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #ffffff;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+    }
+
+    h1 {
+        color: #2e0848;
+        margin-bottom: 20px;
+    }
+
+    form {
+        width: 400px;
+        margin-bottom: 20px;
+        background: linear-gradient(to bottom, rgba(91, 150, 184, 0.83), rgba(211, 157, 241, 0.83));
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: auto;
+    }
+
+    button {
+        background-color: #a3c9e1;
+        color: #20116a;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 15px;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+
+    ul#goal-list {
+        list-style: none;
+        padding: 0;
+        width: 100%;
+    }
+
+    ul#goal-list li {
+        margin-bottom: 15px;
+        background-color: #ffffff;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column; /* Updated to arrange elements vertically */
+        align-items: center;
+    }
+
+    form ul {
+        list-style: none;
+        padding: 0;
+        margin-top: 10px;
+    }
+
+    form ul li {
+        margin-top: 5px;
+        color: #16165d;
+    }
+
+    a {
+        color: #0a3b6e;
+        text-decoration: none;
+        margin-left: 10px;
+    }
+
+    p {
+        margin-bottom: 10px;
+        color: #ada7e1;
+    }
+</style>
+
+<h1>Goal Setting</h1>
+
+<!-- Form for adding new goals -->
+<form method="post" action="{% url 'goal_setting' %}">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Add Goal</button>
+</form>
+
+<div>
+    <!-- Sorting options -->
+    <p>Sort by:
+        <a href="?sort=goal_type">Goal Type</a>
+    </p>
+</div>
+
+<!-- List of existing goals -->
+<ul id="goal-list">
+    {% for goal in goals %}
+        <li>
+            <form method="post" action="{% url 'mark_goal_done' goal.id %}">
+                {% csrf_token %}
+                <input type="submit" value="{% if goal.completed %}Undo{% else %}Mark as Done{% endif %}">
+                {{ goal.description }} ({{ goal.goal_type }})
+                <ul>
+                    {% for topic in goal.topics.all %}
+                        <li>{{ topic.name }}</li>
+                    {% endfor %}
+                </ul>
+            </form>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

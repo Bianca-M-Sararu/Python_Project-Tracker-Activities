@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <h1 class="page-title">Progress Reports</h1>
+
+        <div class="chart-section">
+            <h2>Activities</h2>
+            <div id="activityChart" class="chart-container"></div>
+        </div>
+
+        <div class="summary-section">
+            <h2>Summary</h2>
+            <p>Total Completed Activities: {{ total_goals_completed }}</p>
+        </div>
+    </div>
+    <span>
+        <script type="text/javascript" src="https://kozea.github.io/pygal.js/2.0.x/pygal-tooltips.min.js"></script>
+        <script type="text/javascript" src="https://cdn.rawgit.com/Kozea/pygal.js/2.0.x/pygal-tooltips.min.js"></script>
+        <script type="text/javascript" src="https://kozea.github.io/pygal.js/2.0.x/pygal-tooltips.min.js"></script>
+        {{ activity_chart|safe }}
+    </span>
+   
+{% endblock %}

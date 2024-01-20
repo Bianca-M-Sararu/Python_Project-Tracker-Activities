@@ -1,0 +1,111 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+    body {
+        background-color: #f4f4f4;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    }
+
+    .navbar {
+        background-color: #463b9b;
+        overflow: hidden;
+    }
+
+    .navbar a {
+        float: left;
+        display: block;
+        color: #b5ccea;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    .navbar a:hover {
+        background-color: #96759c;
+        color: black;
+    }
+
+    .container {
+        margin-top: 20px;
+    }
+
+    h1 {
+        color: #4d3ca2;
+    }
+
+    form {
+        margin-bottom: 20px;
+    }
+
+    label {
+        margin-right: 10px;
+    }
+
+    input[type="date"] {
+        padding: 8px;
+        border-radius: 5px;
+        border: 3px solid #6082d1;
+    }
+
+    button {
+        padding: 8px 12px;
+        background-color: #3e2eb8;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .activity-container div {
+        background: linear-gradient(to bottom, rgba(213, 230, 240, 0.83), rgba(171, 205, 239, 0.83));
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(10, 72, 125, 0.9);
+    }
+
+    .activity-container h5 {
+        font-size: 18px;
+        color: #157ac2;
+        margin-bottom: 5px;
+        text-align: center;
+    }
+
+    .activity-container small {
+        font-size: 14px;
+        text-align: center;
+        color: #0b46dc;
+    }
+</style>
+
+<div class="navbar">
+    <!-- Your existing navigation bar remains unchanged -->
+</div>
+
+<div class="container">
+
+    <h1>Real Time Monitoring</h1>
+
+    <div>
+        <form method="get" action="{% url 'real_time_monitoring' %}">
+            <label for="selected_date">Select Date:</label>
+            <input type="date" id="selected_date" name="selected_date" value="{{ selected_date_str }}">
+            <button type="submit">Filter</button>
+        </form>
+    </div>
+
+    <div class="activity-container">
+        <h5>User Activities</h5>
+        {% for activity in user_activitati %}
+            <div>
+                <h5>{{ activity.name }}</h5>
+                <small>Duration: {{ activity.duration_in_seconds }} seconds</small>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock content %}
